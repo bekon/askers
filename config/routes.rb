@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :answer_votes
 
   resources :question_votes

@@ -23,8 +23,10 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   # POST /questions.json
+  before_action :authenticate_user!
   def create
     @question = Question.new(question_params)
+    @question.authorId = current_user.id
 
     respond_to do |format|
       if @question.save
@@ -39,6 +41,7 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
+  before_action :authenticate_user!
   def update
     respond_to do |format|
       if @question.update(question_params)
@@ -53,6 +56,7 @@ class QuestionsController < ApplicationController
 
   # DELETE /questions/1
   # DELETE /questions/1.json
+  before_action :authenticate_user!
   def destroy
     @question.destroy
     respond_to do |format|

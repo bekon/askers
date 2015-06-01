@@ -1,10 +1,10 @@
 default: &default
   adapter: postgresql
-  database: Askers
+  database: askers_dev
   dataserver: localhost
   port: 5432
-  username: postgres
-  password: wormgame
+  username: bekon
+  password: bekon
 
 development:
   <<: *default
