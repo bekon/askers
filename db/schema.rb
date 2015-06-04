@@ -11,35 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150529201150) do
+ActiveRecord::Schema.define(version: 20150604194542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answer_votes", force: true do |t|
-    t.integer  "answerId"
-    t.integer  "userId"
+    t.integer  "answer_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "answers", force: true do |t|
-    t.integer  "authorId"
-    t.integer  "questionId"
+    t.integer  "user_id"
+    t.integer  "question_id"
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "question_votes", force: true do |t|
-    t.integer  "questionId"
-    t.integer  "userId"
+    t.integer  "question_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "questions", force: true do |t|
-    t.integer  "authorId"
+    t.integer  "user_id"
     t.string   "title"
     t.string   "content"
     t.datetime "created_at"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20150529201150) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

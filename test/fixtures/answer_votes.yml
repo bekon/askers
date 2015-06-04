@@ -2,8 +2,8 @@
 
 one:
   answerId: 1
-  userId: 1
+  user_id: 1
 
 two:
   answerId: 1
-  userId: 1
+  user_id: 1

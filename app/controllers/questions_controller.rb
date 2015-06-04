@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
 
   # GET /questions
   # GET /questions.json
@@ -23,10 +24,9 @@ class QuestionsController < ApplicationController
 
   # POST /questions
   # POST /questions.json
-  before_action :authenticate_user!
   def create
     @question = Question.new(question_params)
-    @question.authorId = current_user.id
+    @question.user_id = current_user.id
 
     respond_to do |format|
       if @question.save
@@ -41,7 +41,7 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
-  before_action :authenticate_user!
+
   def update
     respond_to do |format|
       if @question.update(question_params)
@@ -56,7 +56,6 @@ class QuestionsController < ApplicationController
 
   # DELETE /questions/1
   # DELETE /questions/1.json
-  before_action :authenticate_user!
   def destroy
     @question.destroy
     respond_to do |format|
@@ -73,6 +72,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:authorId, :title, :content)
+      params.require(:question).permit(:user_id, :title, :content)
     end
 end

@@ -3,7 +3,7 @@
 <table>
   <thead>
     <tr>
-      <th>Authorid</th>
+      <th>user_id</th>
       <th>Title</th>
       <th>Content</th>
       <th colspan="3"></th>
@@ -13,7 +13,7 @@
   <tbody>
     <% @questions.each do |question| %>
       <tr>
-        <td><%= question.authorId %></td>
+        <td><%= question.user_id %></td>
         <td><%= question.title %></td>
         <td><%= question.content %></td>
         <td><%= link_to 'Show', question %></td>

@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Authorid:</strong>
-  <%= @question.authorId %>
+  <strong>Author:</strong>
+  <%= @question.user.name %>
 </p>
 
 <p>
@@ -14,6 +14,10 @@
   <strong>Content:</strong>
   <%= @question.content %>
 </p>
+
+<div>
+  <span class="glythicon glythicon-hand-right"></span>
+</div>
 
 <%= link_to 'Edit', edit_question_path(@question) %> |
 <%= link_to 'Back', questions_path %>
