@@ -16,7 +16,8 @@
 </p>
 
 <div>
-  <span class="glythicon glythicon-hand-right"></span>
+  <a href="javascript:void(0)" class="vote-icon"></a>
+  <span><%= @question.question_votes.count %></span>
 </div>
 
 <%= link_to 'Edit', edit_question_path(@question) %> |
