@@ -12,11 +12,6 @@ class AnswerVotesController < ApplicationController
   def show
   end
 
-  # GET /answer_votes/new
-  def new
-    @answer_vote = AnswerVote.new
-  end
-
   # GET /answer_votes/1/edit
   def edit
   end
@@ -24,14 +19,14 @@ class AnswerVotesController < ApplicationController
   # POST /answer_votes
   # POST /answer_votes.json
   def create
-    @answer_vote = AnswerVote.new(answer_vote_params)
+    @vote = AnswerVote.new
+    @vote.user_id = current_user.id
+    @vote.answer_id = params[:answerId]
 
     respond_to do |format|
-      if @answer_vote.save
-        format.html { redirect_to @answer_vote, notice: 'Answer vote was successfully created.' }
-        format.json { render :show, status: :created, location: @answer_vote }
+      if @vote.save
+        format.json { head :no_content }
       else
-        format.html { render :new }
         format.json { render json: @answer_vote.errors, status: :unprocessable_entity }
       end
     end

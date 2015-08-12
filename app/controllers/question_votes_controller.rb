@@ -24,15 +24,15 @@ class QuestionVotesController < ApplicationController
   # POST /question_votes
   # POST /question_votes.json
   def create
-    @question_vote = QuestionVote.new(question_vote_params)
+    @vote = QuestionVote.new
+    @vote.user_id = current_user.id
+    @vote.question_id = params[:questionId]
 
     respond_to do |format|
-      if @question_vote.save
-        format.html { redirect_to @question_vote, notice: 'Question vote was successfully created.' }
-        format.json { render :show, status: :created, location: @question_vote }
+      if @vote.save
+        format.json { head :no_content }
       else
-        format.html { render :new }
-        format.json { render json: @question_vote.errors, status: :unprocessable_entity }
+        format.json { render json: @vote.errors, status: :unprocessable_entity }
       end
     end
   end
