@@ -1,63 +1,24 @@
 class QuestionVotesController < ApplicationController
-  before_action :set_question_vote, only: [:show, :edit, :update, :destroy]
-
-  # GET /question_votes
-  # GET /question_votes.json
-  def index
-    @question_votes = QuestionVote.all
-  end
-
-  # GET /question_votes/1
-  # GET /question_votes/1.json
-  def show
-  end
-
-  # GET /question_votes/new
-  def new
-    @question_vote = QuestionVote.new
-  end
-
-  # GET /question_votes/1/edit
-  def edit
-  end
+  before_filter :authenticate_user!, only: [:create]
 
   # POST /question_votes
   # POST /question_votes.json
   def create
-    @question_vote = QuestionVote.new(question_vote_params)
-
-    respond_to do |format|
-      if @question_vote.save
-        format.html { redirect_to @question_vote, notice: 'Question vote was successfully created.' }
-        format.json { render :show, status: :created, location: @question_vote }
-      else
-        format.html { render :new }
-        format.json { render json: @question_vote.errors, status: :unprocessable_entity }
-      end
+    if QuestionVote.exists?(user_id: current_user.id, question_id: params[:questionId])
+      render json: { message: 'The vote already exists' }, status: :unprocessable_entity
+      return
     end
-  end
+      
+    @vote = QuestionVote.new
+    @vote.user_id = current_user.id
+    @vote.question_id = params[:questionId]
 
-  # PATCH/PUT /question_votes/1
-  # PATCH/PUT /question_votes/1.json
-  def update
     respond_to do |format|
-      if @question_vote.update(question_vote_params)
-        format.html { redirect_to @question_vote, notice: 'Question vote was successfully updated.' }
-        format.json { render :show, status: :ok, location: @question_vote }
+      if @vote.save
+        format.json { head :no_content }
       else
-        format.html { render :edit }
-        format.json { render json: @question_vote.errors, status: :unprocessable_entity }
+        format.json { render json: @vote.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /question_votes/1
-  # DELETE /question_votes/1.json
-  def destroy
-    @question_vote.destroy
-    respond_to do |format|
-      format.html { redirect_to question_votes_url, notice: 'Question vote was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
