@@ -1,5 +1,5 @@
 class QuestionVotesController < ApplicationController
-  before_action :set_question_vote, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:create]
 
   # POST /question_votes
   # POST /question_votes.json
