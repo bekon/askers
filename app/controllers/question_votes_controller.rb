@@ -5,7 +5,7 @@ class QuestionVotesController < ApplicationController
   # POST /question_votes.json
   def create
     if QuestionVote.exists?(user_id: current_user.id, question_id: params[:questionId])
-      render json: 'The vote already exists', status: :unprocessable_entity
+      render json: { message: 'The vote already exists' }, status: :unprocessable_entity
       return
     end
       
