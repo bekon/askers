@@ -1,13 +1,13 @@
 $ -> 
   $(document).ready ->
-    $('.vote-icon').click ->
-      answerId = $(this).next().val()
+    $('.question-vote-icon').click ->
+      questionId = $(this).next().val()
 
       $.ajax
         url: '/question_votes.json'
         type: 'POST'
         dataType: 'json'
-        data: { questionId: answerId }
+        data: { questionId: questionId }
         success: =>
           $element = $(@).parent().children('.votes-amount')
           newAmount = parseInt($element.text(), 10) + 1

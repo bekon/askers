@@ -3,30 +3,35 @@ h2 = @question.title
 .question-content 
   = @question.content
 
-.question-footer
+.question-footer.clearfix
   - if @question.user.avatar.url.present?
     = image_tag(@question.user.avatar.url, class: 'avatar-mini pull-left')
 
   .question-user-name.pull-left
 
-  a.vote-icon.pull-right href="javascript:void(0)"
+  a.question-vote-icon.vote-icon.pull-right href="javascript:void(0)"
   input type="hidden" value=@question.id
   span.pull-right.votes-amount 
     = @question.question_votes.count
+
+h3.answers-header
+  span.inline-indent
+    = @answers.count
+  'Answers
 
 - @answers.each do |answer|
   .question-answer
     .answer-content
       = answer.content
 
-    .answer-footer
+    .answer-footer.clearfix
       - if answer.user.avatar.url.present?
         = image_tag(@question.user.avatar.url, class: 'avatar-mini pull-left')
 
       .question-user-name.pull-left
         = answer.user.name
 
-      a.vote-icon.pull-right href="javascript:void(0)"
+      a.vote-icon.answer-vote-icon.pull-right href="javascript:void(0)"
       input type="hidden" value=@question.id
       span.pull-right.votes-amount 
         = answer.answer_votes.count
