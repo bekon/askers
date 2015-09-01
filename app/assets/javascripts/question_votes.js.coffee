@@ -1,7 +1,7 @@
 $ -> 
   $(document).ready ->
     $('.question-vote-icon').click ->
-      questionId = $(this).next().val()
+      questionId = $(@).next().val()
 
       $.ajax
         url: '/question_votes.json'

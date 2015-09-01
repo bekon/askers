@@ -1,5 +1,5 @@
 class AnswerVotesController < ApplicationController
-  before_filter :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:create]
 
   # POST /answer_votes.json
   def create
