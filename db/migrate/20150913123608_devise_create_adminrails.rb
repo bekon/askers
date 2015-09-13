@@ -1,6 +1,6 @@
-class DeviseCreateUsers < ActiveRecord::Migration
+class DeviseCreateAdminrails < ActiveRecord::Migration
   def change
-    create_table(:users) do |t|
+    create_table(:adminrails) do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -30,13 +30,17 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      t.string :generate
+      t.string :migration
+      t.string :add_admin_to_users
+      t.boolean :admin
 
-      t.timestamps
+      t.timestamps null: false
     end
 
-    add_index :users, :email,                unique: true
-    add_index :users, :reset_password_token, unique: true
-    # add_index :users, :confirmation_token,   unique: true
-    # add_index :users, :unlock_token,         unique: true
+    add_index :adminrails, :email,                unique: true
+    add_index :adminrails, :reset_password_token, unique: true
+    # add_index :adminrails, :confirmation_token,   unique: true
+    # add_index :adminrails, :unlock_token,         unique: true
   end
 end

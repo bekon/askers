@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :adminrails
   devise_for :users
+
+  resources :users, only: [:show]
+  
   resources :answer_votes
 
   resources :question_votes
