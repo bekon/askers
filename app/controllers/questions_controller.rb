@@ -11,6 +11,8 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
+    @question_answer = Answer.new
+    @answers = @question.answers.order(created_at: :desc).limit(5)
   end
 
   # GET /questions/new
